@@ -12,7 +12,7 @@ def process_images(generator):
         return
 
     output_path = generator.settings['OUTPUT_PATH']
-    images_output_path = os.path.join(output_path, 'static', 'images')
+    images_output_path = output_path
 
     try:
         for path, suffix, processes in resize:
