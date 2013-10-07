@@ -11,8 +11,8 @@ def process_images(generator):
         print "\033[1;33mWARNING\033[00m: No Resize Option Provided"
         return
 
-    output_path = generator.settings['OUTPUT_PATH']
-    images_output_path = output_path
+    output_path = generator.settings['PATH']
+    images_output_path = os.path.join(output_path,'images')
 
     try:
         for path, suffix, processes in resize:
@@ -37,11 +37,11 @@ def process_images(generator):
                         if not os.path.isdir(d_path):
                             os.makedirs(d_path)
 
-                        # Process image
-                        image = Image.open(image_path)
-                        image = processor.process(image)
-
-                        image.save(output_image_path)
+			if not os.path.exists(output_image_path):
+                            # Process image
+                            image = Image.open(image_path)
+                            image = processor.process(image)
+                            image.save(output_image_path)
 
     except (TypeError, AttributeError, ValueError):
         print """\nEnsure the presense of the following setting in pelicanconf.py. Paying particular attention to [], () and ''\n\n
